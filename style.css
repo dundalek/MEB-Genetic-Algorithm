@@ -1,0 +1,131 @@
+/* ===================== main ====================== */
+
+body.main {
+    margin: 15px;
+    font-family: helvetica, arial, sans-serif;
+}
+
+.main h1 {
+    float: left;
+    margin: 0;
+    margin-top: 10px;
+}
+
+#intro div {
+    margin-left: 600px;
+}
+
+#vis {
+    float: left;
+}
+
+#fitness-graph, #result {
+    float: left;
+    clear: left;
+}
+
+#fitness-graph {
+    margin-bottom: 20px;
+}
+
+.panel {
+    margin-left: 600px;
+}
+
+#vis>svg {
+    border: 1px solid gray;
+}
+.beam {
+    opacity : 0.1;
+    fill: #007fff;
+}
+.node {
+
+}
+
+.group {
+    margin-top: 20px;
+}
+.group-label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#group-controls {
+    margin: 0;
+}
+
+.params input {
+    width: 80px;
+}
+
+#chart_container {
+    font-family: helvetica, arial, sans-serif;
+}
+#chart {
+    float:left;
+    margin-right: 15px;
+}
+#legend {
+    float: right;
+    background-color: white;
+}
+#legend ul {
+    color: #181818;
+    background-color: white;
+    border: 1px #B8B8B8 dotted;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* ===================== report ====================== */
+body.report {
+    font-size: 16px;
+    margin: 50px;
+}
+
+.report h1 {
+    text-align: center;
+}
+
+.author {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 30px;
+}
+
+.organization {
+    text-align: center;
+}
+
+pre {
+    line-height: 24px;
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+
+.citation {
+    margin-left: 30px;
+    font-style: italic;
+}
+
+/* ===================== common ====================== */
+
+table.results {
+    border: 1px solid #aaa;
+    text-align: center;
+    font-family: helvetica, arial, sans-serif;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+
+table.results th {
+    border: 1px solid #aaa;
+    font-weight: bold;
+    padding: 2px 8px;
+}
+
+table.results td {
+    padding: 2px 8px;
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Minimum Energy Broadcast Problem (Genetic Algorithm)</title>
+
+    <link type="text/css" rel="stylesheet" href="libs/rickshaw.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <script src="libs/jquery-1.7.1.min.js"></script>
+    <script src="libs/d3.v2.min.js"></script>
+    <script src="libs/d3.layout.min.js"></script>
+    <script src="libs/rickshaw.min.js"></script>
+
+    <script src="js/util.js"></script>
+    <script src="js/ga.js"></script>
+    <script src="js/meb.js"></script>
+    <script src="js/meb.visualization.js"></script>
+    <script src="js/graph.fitness.js"></script>
+
+    <script src="data/data.js"></script>
+
+    <script type="text/html" id="params_tmpl">
+        <table>
+            {{ for (var o in options) { }}
+                <tr>
+                    <td>{{=o}}</td>
+                    <td><input type="text" value="{{=options[o]}}" id="param-{{=o}}"></td>
+                </tr>
+            {{ } }}
+    </script>
+
+    <script type="text/html" id="chooser_tmpl">
+        <table>
+            <tr>
+                <td>Problem size:</td>
+                <td>
+                    <select id="problemSize">
+                        {{ for (var i = 0; i < problemSizes.length; i+=1) { }}
+                        <option value="{{=problemSizes[i]}}">{{=problemSizes[i]}}</option>
+                        {{ } }}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Problem instance:</td>
+                <td>
+                    <select id="problemInstance">
+                        {{ for (var i = 0; i < problemCount; i+=1) { }}
+                        <option value="{{=i}}">{{=i}}</option>
+                        {{ } }}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Show fitness graph:</td>
+                <td>
+                    <input type="checkbox" id="showFitnessGraph" checked="checked">
+                </td>
+            </tr>
+        </table>
+    </script>
+
+    <script type="text/html" id="stats_tmpl">
+        <table>
+            <tr>
+                <td>Time:</td>
+                <td>{{=ga.running?((new Date() - stats.time_started)/1000)+' s':''}}</td>
+            </tr>
+            {{ for (var l in labels) { }}
+                <tr>
+                    <td>{{=labels[l]}}:</td>
+                    <td>{{=Math.round(stats[l])}}</td>
+                </tr>
+            {{ } }}
+            <tr>
+                <td>Diff from optimal:</td>
+                <td>{{=Math.round(stats.diffopt*100)/100}} % ({{=stats.optimal}})</td>
+            </tr>
+            <tr>
+                <td>Root node:</td>
+                <td>{{=ga.sourceNode}}</td>
+            </tr>
+            <tr>
+                <td>Best genes:</td>
+                <td>{{=stats.indbest.genes.join(' ')}}</td>
+            </tr>
+        </table>
+    </script>
+
+    <script type="text/html" id="table_tmpl">
+        <table class="results">
+            <tr>
+                <th>instance</th>
+                <th>excess</th>
+                <th>optimum</th>
+                <th>found after</th>
+                <th>time</th>
+                <th>gen_found</th>
+                <th>gen_total</th>
+            </tr>
+        </table>
+    </script>
+
+    <script type="text/html" id="tablerow_tmpl">
+            <tr>
+                <td>{{=instance}}</td>
+                <td>{{=excess}}</td>
+                <td>{{=opt_found}}</td>
+                <td>{{=found_after}}</td>
+                <td>{{=time}}</td>
+                <td>{{=gen_found}}</td>
+                <td>{{=gen_total}}</td>
+            </tr>
+    </script>
+
+  </head>
+  <body class="main">
+    <div id="intro">
+        <h1>Minimum Energy Broadcast Problem</h1>
+        <div>Demonstration of a genetic algorithm.<br>
+        See the <a href="report.html">report</a> for more details.<br>
+        Created by Jakub Dundálek, 2012.
+        </div>
+        <br style="clear: both">
+    </div>
+
+    <div id="vis"></div>
+
+    <div class="group" id="fitness-graph">
+            <div class="group-label">Fitness</div>
+
+            <div id="chart_container">
+                    <div id="chart"></div>
+                    <div id="legend"></div>
+            </div>
+    </div>
+
+    <div id="result">
+    </div>
+
+    <div class="panel">
+        <div class="group" id="group-controls">
+            <div class="group-label">Controls</div>
+            <div class="buttons">
+                <input type="button" value="start" id="start-stop">
+                <input type="button" value="step" id="step">
+                <input type="button" value="reset" id="reset">
+                <input type="button" value="run tests" id="runtests">
+            </div>
+            <div id="chooser"></div>
+        </div>
+
+        <div class="group" id="group-params">
+            <div class="group-label">Parameters</div>
+            <div class="params"></div>
+            <div>
+                <input type="button" value="default" id="default">
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="group-label">Stats</div>
+            <div class="stats"></div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
