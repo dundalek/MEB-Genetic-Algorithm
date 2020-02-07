@@ -35,7 +35,7 @@ $.extend(GA.prototype, {
     },
     initRules: [
         {count: Infinity, fn: GA.createFnFactory(function() {
-            randInt(this.nGenes);
+            return randInt(this.nGenes);
         })}
     ],
     offspringRules: [
@@ -114,7 +114,7 @@ $.extend(GA.prototype, {
         return tempbest;
     },
     mutate: GA.mutateFnFactory(function() {
-        randInt(this.nGenes);
+        return randInt(this.nGenes);
     }),
     // 2point crossover
     crossover: function(parents) {
